@@ -1,0 +1,19 @@
+version: '3'
+services:
+    web:
+        build:
+            context: . # essentially specifices where we want all folders and files to be pulled from
+            dockerfile: Dockerfile.dev
+        ports:
+            - "3000:3000"  # do the dash to start a list
+        volumes:
+            - /app/node_modules
+            - .:/app  # cwd outside the container to app inside the container
+    tests:  # second container for test
+        build:
+            context: .
+            dockerfile: Dockerfile.dev
+        volumes:
+            - /app/node_modules
+            - .:/app
+        command: ["npm", "run", "test"]  # override default startup command

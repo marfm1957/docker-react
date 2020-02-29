@@ -1,0 +1,11 @@
+#the .dev signifies it is only for dev environement workflows
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+CMD ["npm", "run", "start"]
